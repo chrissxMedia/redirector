@@ -8,9 +8,23 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Got a request over %s from %s: %s.",
+		log.Printf("Got an %s request from %s: %s",
 			r.Proto, r.RemoteAddr, r.URL)
-		fmt.Fprintf(w, "<html><head><title>Redirecting...</title><script>window.location.protocol = 'https:'</script></head><body>Just replace that \"http://\" with a \"https://\" up there ^</body></html>")
+                url := r.URL
+                url.Scheme := "https"
+		fmt.Fprintf(w, "<html>")
+		fmt.Fprintf(w, "<head>")
+		fmt.Fprintf(w, "<title>Redirecting...</title>")
+		fmt.Fprintf(w, "<script>")
+		fmt.Fprintf(w, "window.location.protocol = 'https:'")
+		fmt.Fprintf(w, "</script>")
+		fmt.Fprintf(w, "</head>")
+		fmt.Fprintf(w, "<body>")
+		fmt.Fprintf(w, "Just switch to https up there ↑")
+                fmt.Fprintf(w, "<br/>")
+                fmt.Fprintf(w, "Or click <a href='%s'>here</a>", url)
+		fmt.Fprintf(w, "</body>")
+		fmt.Fprintf(w, "</html>")
 	})
 
 	http.ListenAndServe(":80", nil)

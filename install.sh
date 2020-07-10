@@ -1,4 +1,5 @@
 curl -Lo /usr/bin/redirector https://github.com/chrissxYT/chrissx.de-80/releases/download/1.0/redirector-arm
+chmod +x /usr/bin/redirector
 
 echo "[Unit]
 Description=A simple static HTML

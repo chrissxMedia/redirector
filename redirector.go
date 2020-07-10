@@ -13,5 +13,5 @@ func main() {
 		fmt.Fprintf(w, "<html><head><title>Redirecting...</title><script>window.location.protocol = 'https:'</script></head><body>Just replace that \"http://\" with a \"https://\" up there ^</body></html>")
 	})
 
-	http.ListenAndServe(":8086", nil)
+	http.ListenAndServe(":80", nil)
 }

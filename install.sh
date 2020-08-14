@@ -1,4 +1,4 @@
-curl -Lo /usr/bin/redirector https://github.com/chrissxYT/chrissx.de-80/releases/download/3.0/redirector-arm
+curl -Lo /usr/bin/redirector https://github.com/chrissxYT/chrissx.de-80/releases/download/3.1/redirector-arm
 chmod +x /usr/bin/redirector
 
 echo "[Unit]

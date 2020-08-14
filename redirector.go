@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -29,8 +30,10 @@ func main() {
 			strings.Contains(r.Host, "chrissx.eu") ||
 			strings.Contains(r.Host, "zerm.eu") ||
 			strings.Contains(r.Host, "zerm.link") {
-			var url = r.URL
+			var url = url.URL{}
+			url.Host = r.Host
 			url.Scheme = "https"
+			url.Path = r.URL.Path
 			w.Header().Add("Location", url.String())
 			w.WriteHeader(307)
 		}

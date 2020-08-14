@@ -1,8 +1,8 @@
-curl -Lo /usr/bin/redirector https://github.com/chrissxYT/chrissx.de-80/releases/download/2.1/redirector-arm
+curl -Lo /usr/bin/redirector https://github.com/chrissxYT/chrissx.de-80/releases/download/3.0/redirector-arm
 chmod +x /usr/bin/redirector
 
 echo "[Unit]
-Description=A simple static HTML
+Description=A simple HTTPS upgrador
 
 [Service]
 Type=simple

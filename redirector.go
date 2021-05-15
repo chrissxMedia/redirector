@@ -9,19 +9,19 @@ import (
 )
 
 func main() {
-	var response = "<html>"
-	response += "<head>"
-	response += "<title>Redirecting...</title>"
-	response += "<script>"
-	response += "window.location.protocol = 'https:'"
-	response += "</script>"
-	response += "</head>"
-	response += "<body>"
-	response += "Just switch to https up there ↑"
-	response += "</body>"
-	response += "</html>"
+	var response = `
+<html>
+<head>
+<title>Redirecting...</title>
+<script>window.location.protocol = 'https:';</script>
+</head>
+<body>
+Just switch to https up there ↑
+</body>
+</html>
+`
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Got an %s request from %s: %s (%s)",
+		log.Printf("Got a %s request from %s: %s (%s)",
 			r.Proto, r.RemoteAddr, r.URL, r.Host)
 		// this matches urls like chrissx.de.evil.com, but
 		// there are no ways to exploit that (except if there

@@ -1,0 +1,22 @@
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+checksum:
+  name_template: 'checksums.txt'
+nfpms:
+  - maintainer: Chris Häußler <chrissx@chrissx.de>
+    description: A simple HTTPS upgrader
+    homepage: https://github.com/chrissxYT/chrissx.de-80
+    license: AGPLv3
+    formats:
+      - deb
+      - rpm
+      - apk

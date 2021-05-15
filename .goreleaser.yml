@@ -14,7 +14,7 @@ checksum:
 nfpms:
   - maintainer: Chris Häußler <chrissx@chrissx.de>
     description: A simple HTTPS upgrader
-    homepage: https://github.com/chrissxYT/chrissx.de-80
+    homepage: https://github.com/chrissxYT/redirector
     license: AGPLv3
     formats:
       - deb

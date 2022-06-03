@@ -48,7 +48,9 @@ Just switch to https up there ↑
 		if strings.Contains(r.Host, "chrissx.de") ||
 			strings.Contains(r.Host, "chrissx.eu") ||
 			strings.Contains(r.Host, "zerm.eu") ||
-			strings.Contains(r.Host, "zerm.link") {
+			strings.Contains(r.Host, "zerm.link") ||
+			strings.Contains(r.Host, "fuxgames.com") ||
+			strings.Contains(r.Host, "lowlevelmusic.com") {
 			var url = url.URL{}
 			url.Host = r.Host
 			url.Scheme = "https"

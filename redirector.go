@@ -56,7 +56,7 @@ Just switch to https up there ↑
 			url.Scheme = "https"
 			url.Path = r.URL.Path
 			w.Header().Add("Location", url.String())
-			w.WriteHeader(307)
+			w.WriteHeader(301)
 			hostReqs.WithLabelValues().Inc()
 		}
 		fmt.Fprintf(w, response)

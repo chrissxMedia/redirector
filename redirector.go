@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"log"
 	"net/http"
@@ -11,19 +12,10 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-func main() {
-	var response = `
-<html>
-<head>
-<title>Redirecting...</title>
-<script>window.location.protocol = 'https:';</script>
-</head>
-<body>
-Just switch to https up there ↑
-</body>
-</html>
-`
+//go:embed response.min.html
+var response string
 
+func main() {
 	var totalReqs = prometheus.NewCounterVec(prometheus.CounterOpts{
 		Name: "redirector_total_requests",
 		Help: "Total number of HTTP requests coming in.",

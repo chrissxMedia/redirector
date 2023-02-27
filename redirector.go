@@ -31,18 +31,10 @@ func main() {
 	http.Handle("/metrics", promhttp.Handler())
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("Got a %s request from %s: %s (%s)",
+		log.Printf("%s request from %s: %s (%s)",
 			r.Proto, r.RemoteAddr, r.URL, r.Host)
 		totalReqs.WithLabelValues().Inc()
-		// this matches urls like chrissx.de.evil.com, but
-		// there are no ways to exploit that (except if there
-		// are other misdesigns)
-		if strings.Contains(r.Host, "chrissx.de") ||
-			strings.Contains(r.Host, "chrissx.eu") ||
-			strings.Contains(r.Host, "zerm.eu") ||
-			strings.Contains(r.Host, "zerm.link") ||
-			strings.Contains(r.Host, "fuxgames.com") ||
-			strings.Contains(r.Host, "lowlevelmusic.com") {
+		if strings.Contains(r.Host, ".") && !strings.Contains(r.Host, ":") {
 			var url = url.URL{}
 			url.Host = r.Host
 			url.Scheme = "https"

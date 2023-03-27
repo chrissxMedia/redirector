@@ -3,11 +3,11 @@ package main
 import (
 	_ "embed"
 	"fmt"
-	"log"
 	"net/http"
 	"net/url"
 	"strings"
 
+	"github.com/chrissxMedia/cm3.go"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -30,9 +30,7 @@ func main() {
 	prometheus.MustRegister(hostReqs)
 	http.Handle("/metrics", promhttp.Handler())
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("%s request from %s: %s (%s)",
-			r.Proto, r.RemoteAddr, r.URL, r.Host)
+	cm3.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		totalReqs.WithLabelValues().Inc()
 		if strings.Contains(r.Host, ".") && !strings.Contains(r.Host, ":") {
 			var url = url.URL{Host: r.Host, Scheme: "https", Path: r.URL.Path}
@@ -43,5 +41,5 @@ func main() {
 		fmt.Fprintf(w, response)
 	})
 
-	http.ListenAndServe(":80", nil)
+	cm3.ListenAndServeHttp(":80", nil)
 }

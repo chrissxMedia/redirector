@@ -9,7 +9,6 @@ import (
 
 	"github.com/chrissxMedia/cm3.go"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 //go:embed response.min.html
@@ -26,9 +25,7 @@ func main() {
 		Help: "Number of HTTP requests that contain the Host header.",
 	}, []string{})
 
-	prometheus.MustRegister(totalReqs)
-	prometheus.MustRegister(hostReqs)
-	http.Handle("/metrics", promhttp.Handler())
+	cm3.HandleMetrics(totalReqs, hostReqs)
 
 	cm3.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		totalReqs.WithLabelValues().Inc()

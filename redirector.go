@@ -35,10 +35,7 @@ func main() {
 			r.Proto, r.RemoteAddr, r.URL, r.Host)
 		totalReqs.WithLabelValues().Inc()
 		if strings.Contains(r.Host, ".") && !strings.Contains(r.Host, ":") {
-			var url = url.URL{}
-			url.Host = r.Host
-			url.Scheme = "https"
-			url.Path = r.URL.Path
+			var url = url.URL{Host: r.Host, Scheme: "https", Path: r.URL.Path}
 			w.Header().Add("Location", url.String())
 			w.WriteHeader(301)
 			hostReqs.WithLabelValues().Inc()

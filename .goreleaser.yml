@@ -12,9 +12,9 @@ builds:
 checksum:
   name_template: 'checksums.txt'
 nfpms:
-  - maintainer: Chris Häußler <chrissx@chrissx.de>
+  - maintainer: Pixel Häußler <pixel+github@chrissx.de>
     description: A simple HTTPS upgrader
-    homepage: https://github.com/chrissxYT/redirector
+    homepage: https://github.com/chrissxMedia/redirector
     license: AGPLv3
     formats:
       - deb

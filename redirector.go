@@ -12,6 +12,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
+//go:generate npx html-minifier --collapse-whitespace --remove-comments --remove-tag-whitespace --minify-css true --minify-js true -o response.min.html response.html
+
 //go:embed response.min.html
 var response string
 

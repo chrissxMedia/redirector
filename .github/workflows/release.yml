@@ -35,6 +35,18 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - uses: docker/build-push-action@v7
         with:
+          load: true
+          context: .
+          tags: chrissx/redirector:latest
+      - name: Test image
+        timeout-minutes: 2
+        run: |
+          trap 'docker logs smoke; docker rm -f smoke' EXIT
+          docker run -d --name smoke -p 127.0.0.1:8080:80 chrissx/redirector:latest
+          curl --fail --retry 10 --retry-connrefused --retry-delay 1 --max-time 2 --retry-max-time 30 http://127.0.0.1:8080/ -o /dev/null
+          test "$(curl -sS --max-time 2 -o /dev/null -w '%{http_code} %{redirect_url}' -H 'Host: example.com' http://127.0.0.1:8080/smoke)" = '301 https://example.com/smoke'
+      - uses: docker/build-push-action@v7
+        with:
           push: true
           context: .
           platforms: linux/amd64,linux/arm64
